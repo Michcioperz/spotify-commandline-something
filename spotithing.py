@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import spotify, random, getpass, jinja2, time
+import spotify, random, getpass, jinja2, time, sys
 
 trackshowtemplate = jinja2.Template("""{% for artist in t.artists %}{{artist.name}} {% endfor %}- {{ t.name }} - {{ t.album.name }}""")
 config = spotify.Config()
@@ -23,8 +23,34 @@ def playsth():
     session.player.load(t)
     session.player.play()
     return t
+def playanwa():
+    try:
+        input(trackshowtemplate.render(t = playsth()))
+    except IndexError:
+        playanwa()
 
 if __name__ == '__main__':
-    time.sleep(10)
+    print("I will now do backend magic, wait a minute")
+    print("%s [" % random.choice(["Charging low orbit ion cannon","Trying to catch Pikachu","Starting a flame war on Reddit","Saving the world (to a file)"]),end='')
+    while session.connection.state is not spotify.ConnectionState.LOGGED_IN:
+        print('.', end='')
+        session.process_events()
+        sys.stdout.flush()
+        time.sleep(0.1)
+    print('|', end='')
+    strd.load()
+    while not strd.is_loaded:
+        print('.', end='')
+        session.process_events()
+        sys.stdout.flush()
+        time.sleep(0.1)
+    print('|', end='')
+    strd.set_in_ram(True)
+    while not strd.is_in_ram:
+        print('.', end='')
+        session.process_events()
+        sys.stdout.flush()
+        time.sleep(0.1)
+    print(']')
     while True:
-       input(trackshowtemplate.render(t = playsth()))
+        playanwa()
